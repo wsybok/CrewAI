@@ -6,7 +6,7 @@ from google.colab import userdata
 from langchain.agents import load_tools
 from tools import scrape_reddit
 
-api = userdata.get('OPENAI_API_KEY')
+api = os.environ.get("OPENAI_API_KEY")
 
 human_tools = load_tools(["human"])
 
