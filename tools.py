@@ -12,7 +12,7 @@ def scrape_reddit(max_comments_per_post=7):
         client_secret="QzqidqUIkYuwN3g4MoNlm2rLARgw_A",
         user_agent="user-agent",
     )
-    subreddit = reddit.subreddit("LocalLLaMA")
+    subreddit = reddit.subreddit("LocalLLaMA") #get posts in the LocalLLaMA channel
     scraped_data = []
 
     for post in subreddit.hot(limit=12):
