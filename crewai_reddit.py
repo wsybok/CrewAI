@@ -1,16 +1,8 @@
-!pip install praw
-!pip install langchain
-!pip install crewai
-!pip install asyncpraw
-
 import praw
 import time
 import os
-import asyncio
-import asyncpraw
 
 from langchain.tools import tool
-from langchain.llms import Ollama
 from crewai import Agent, Task, Process, Crew
 from google.colab import userdata
 from langchain.agents import load_tools
