@@ -17,9 +17,9 @@ class CrewAgents():
     verbose=True,
     allow_delegation=False,
     tools=[Reddit_BrowserTool().scrape_reddit] + human_tools
-)
+    )
 
-def writer(self):
+  def writer(self):
     return Agent(
     role="Senior Technical Writer",
     goal="Write engaging and interesting blog posts about the latest AI projects using simple, layman vocabulary",
@@ -28,9 +28,9 @@ def writer(self):
     fun way by using layman words. ONLY use scraped data from the LocalLLama subreddit for the blog.""",
     verbose=True,
     allow_delegation=True
-)
+ )
 
-def critic(self):
+  def critic(self):
     return Agent(
     role="Expert Writing Critic",
     goal="Provide feedback and criticize blog post drafts. Ensure that the tone and writing style is compelling, simple, and concise",
@@ -39,4 +39,4 @@ def critic(self):
     remains technical and insightful while using layman terms.""",
     verbose=True,
     allow_delegation=True
-)
+    )
