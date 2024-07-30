@@ -2,7 +2,6 @@
 
 import os
 from crewai import Agent, Task, Process, Crew
-from google.colab import userdata
 from langchain.agents import load_tools
 from tools import scrape_reddit
 
@@ -10,7 +9,7 @@ api = os.environ.get("OPENAI_API_KEY")
 
 human_tools = load_tools(["human"])
 
-class BrowserTool:
+class Reddit_BrowserTool:
     scrape_reddit = scrape_reddit
 
 explorer = Agent(
