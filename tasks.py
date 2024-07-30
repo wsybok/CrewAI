@@ -1,10 +1,11 @@
 from crewai import Task
 from textwrap import dedent
+from agents import explorer, writer, critic
 
 class CrewTasks():
     def task_report():
       return Task(description=dedent(f"""
-      Use and summarize scraped data from subreddit LocalLLama to make a detailed report on the latest rising projects in AI. Use ONLY scraped data from LocalLLama to generate the report. Your final answer MUST be a full analysis report, text only, ignore any code or anything that isn't text. The report has to have bullet points and with 5-10 exciting new AI projects and tools. Write names of every tool and project. Each bullet point MUST contain 3 sentences that refer to one specific AI company, product, model or anything you found on subreddit LocalLLama.""",
+      Use and summarize scraped data from subreddit LocalLLama to make a detailed report on the latest rising projects in AI. Use ONLY scraped data from LocalLLama to generate the report. Your final answer MUST be a full analysis report, text only, ignore any code or anything that isn't text. The report has to have bullet points and with 5-10 exciting new AI projects and tools. Write names of every tool and project. Each bullet point MUST contain 3 sentences that refer to one specific AI company, product, model or anything you found on subreddit LocalLLama."""),
     agent=explorer,
     expected_output="""A text-based analysis report with the following structure:
     - Title of the report
@@ -22,7 +23,7 @@ class CrewTasks():
     the report on the latest AI tools found on the LocalLLama subreddit. The style and tone should be compelling and concise, fun, technical but also use
     layman words for the general public. Name specific new, exciting projects, apps, and companies in the AI world. Don't
     write "**Paragraph [number of the paragraph]:**", instead start the new paragraph in a new line. Write the names of projects and tools in BOLD.
-    ALWAYS include links to the post page. ONLY include information from LocalLLAma.""",
+    ALWAYS include links to the post page. ONLY include information from LocalLLAma."""),
 
     agent=writer,
     expected_output="""A text-only blog article with the following structure:
@@ -48,7 +49,7 @@ class CrewTasks():
       
     def task_critique():
       return Task(description=dedent(f"""
-      The task entails summarizing and critiquing AI projects from the LocalLLama subreddit. The output must be formatted in Markdown and include interesting facts and personal thoughts on how each project connects to the overall theme of the newsletter.""",
+      The task entails summarizing and critiquing AI projects from the LocalLLama subreddit. The output must be formatted in Markdown and include interesting facts and personal thoughts on how each project connects to the overall theme of the newsletter."""),
       agent=critic,
       output_file='output.md',
       expected_output="""The Output MUST have the following markdown format:
