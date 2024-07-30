@@ -1,8 +1,10 @@
+import praw
+import time
 from langchain.tools import tool
 
 class Reddit_BrowserTool:
     @tool("Scrape reddit content")
-    def scrape_reddit(max_comments_per_post=7):
+    def scrape_reddit(self, max_comments_per_post=7):
         """Useful to scrape a reddit content"""
         reddit = praw.Reddit(
             client_id="hrwfUNc2xubrhwrlHDStNA",
@@ -19,7 +21,7 @@ class Reddit_BrowserTool:
                 post.comments.replace_more(limit=0)  # Load top-level comments only
                 comments = post.comments.list()
                 if max_comments_per_post is not None:
-                    comments = comments[:7]
+                    comments = comments[:max_comments_per_post]
 
                 for comment in comments:
                     post_data["comments"].append(comment.body)
