@@ -1,10 +1,14 @@
 from crewai import Agent
 from tools.Reddit_BrowserTool import Reddit_BrowserTool
+from langchain_community.agent_toolkits.load_tools import load_tools
+
+human_tools = load_tools(["human"])
+
 
 class CrewAgents():
   def explorer(self):
     return Agent(
-        role="Senior Researcher",
+    role="Senior Researcher",
     goal="Find and explore the most exciting projects and companies on LocalLLama subreddit in 2024",
     backstory="""You are an expert strategist who knows how to spot emerging trends and companies in AI, tech, and machine learning.
     You're great at finding interesting, exciting projects on the LocalLLama subreddit. You turn scraped data into detailed reports with names
