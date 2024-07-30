@@ -2,9 +2,9 @@ import praw
 import time
 from langchain.tools import tool
 
-class Reddit_BrowserTool:
+class RedditBrowserTool:
     @tool("Scrape reddit content")
-    def scrape_reddit(self, max_comments_per_post=7):
+    def scrape_reddit(max_comments_per_post=7):
         """Useful to scrape a reddit content"""
         reddit = praw.Reddit(
             client_id="hrwfUNc2xubrhwrlHDStNA",

@@ -1,8 +1,8 @@
 from crewai import Agent
-from tools.Reddit_BrowserTool import Reddit_BrowserTool
+from tools.Reddit_BrowserTool import RedditBrowserTool
 from langchain_community.agent_toolkits.load_tools import load_tools
 
-reddit_tool = Reddit_BrowserTool()
+reddit_tool = RedditBrowserTool()
 human_tools = load_tools(["human"])
 
 class CrewAgents:
