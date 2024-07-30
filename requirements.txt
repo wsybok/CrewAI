@@ -3,3 +3,6 @@ langchain
 crewai
 telebot
 python-dotenv
+pyTelegramBotAPI
+markdown
+telegraph
