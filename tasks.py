@@ -57,17 +57,8 @@ class CrewTasks:
             The task entails summarizing and critiquing AI projects from the LocalLLama subreddit. The output must be formatted in Markdown and include interesting facts and personal thoughts on how each project connects to the overall theme of the newsletter.
             """),
             agent=CrewAgents().critic(),
-            output_file='output.md',
+            output_file='research_report.html',
             expected_output=dedent("""
-            The Output MUST have the following markdown format:
-            ```
-            ## [Title of post](link to post)
-            - Interesting facts
-            - Own thoughts on how it connects to the overall theme of the newsletter
-            ## [Title of second post](link to post)
-            - Interesting facts
-            - Own thoughts on how it connects to the overall theme of the newsletter
-            ```
-            The critique should be compelling and concise, with explanations in layman terms, summarizing AI projects from the LocalLLama subreddit, with sections for interesting facts, key features, and potential impacts.
+            An HTML file named research_report.html containing the blog article.'
             """)
         )

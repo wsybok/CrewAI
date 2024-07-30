@@ -1,9 +1,12 @@
 from crewai import Agent
 from tools.Reddit_BrowserTool import RedditBrowserTool
 from langchain_community.agent_toolkits.load_tools import load_tools
+from langchain_openai import ChatOpenAI
 
 reddit_tool = RedditBrowserTool()
 human_tools = load_tools(["human"])
+
+
 
 class CrewAgents:
     def explorer(self):
@@ -16,6 +19,7 @@ class CrewAgents:
             """,
             verbose=True,
             allow_delegation=False,
+            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
             tools=[reddit_tool.scrape_reddit] + human_tools
         )
 
@@ -27,6 +31,7 @@ class CrewAgents:
             an engaging, interesting, but simple, straightforward, and concise manner. You know how to present complicated technical terms to the general audience in a
             fun way by using layman words. ONLY use scraped data from the LocalLLama subreddit for the blog.""",
             verbose=True,
+            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
             allow_delegation=True
         )
 
@@ -38,5 +43,6 @@ class CrewAgents:
             simple, or engaging enough. You know how to provide helpful feedback that can improve any text. You ensure that the text
             remains technical and insightful while using layman terms.""",
             verbose=True,
+            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
             allow_delegation=True
         )
