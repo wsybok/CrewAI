@@ -1,8 +1,8 @@
 import os
 from crewai import Agent, Task, Process, Crew
-from langchain.agents import load_tools
-from Agents import StockAnalysisAgents
-from Tasks import StockAnalysisTasks
+from langchain_community.agent_toolkits.load_tools import load_tools
+from agents import StockAnalysisAgents
+from tasks import StockAnalysisTasks
 
 api = os.environ.get("OPENAI_API_KEY")
 
