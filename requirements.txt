@@ -1,3 +1,4 @@
 praw
 langchain
 crewai
+telebot
