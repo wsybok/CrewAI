@@ -5,6 +5,7 @@ from agents import CrewAgents
 from tasks import CrewTasks
 from telegram_bot import TelegramBot
 from telegraph import Telegraph, TelegraphException
+from bs4 import BeautifulSoup
 
 
 
@@ -30,6 +31,13 @@ report_file_path = "research_report.html"
 # Read the content of the HTML report file
 with open(report_file_path, "r", encoding="utf-8") as file:
     html_report = file.read()
+
+# Use BeautifulSoup to parse the HTML and extract the body content
+soup = BeautifulSoup(html_report, 'html.parser')
+body_content = soup.body
+
+# Convert the body content back to a string
+html_content = str(body_content)
 
 
 print("######################")

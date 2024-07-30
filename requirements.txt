@@ -6,3 +6,4 @@ python-dotenv
 pyTelegramBotAPI
 markdown
 telegraph
+BeautifulSoup
