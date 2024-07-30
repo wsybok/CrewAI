@@ -12,7 +12,7 @@ class CrewAgents():
     """,
     verbose=True,
     allow_delegation=False,
-    tools=[BrowserTool().scrape_reddit] + human_tools
+    tools=[Reddit_BrowserTool().scrape_reddit] + human_tools
 )
 
 def writer(self):
