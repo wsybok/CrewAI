@@ -1,5 +1,7 @@
-explorer = Agent(
-    role="Senior Researcher",
+class CrewAgents():
+  def explorer(self):
+    return Agent(
+        role="Senior Researcher",
     goal="Find and explore the most exciting projects and companies on LocalLLama subreddit in 2024",
     backstory="""You are an expert strategist who knows how to spot emerging trends and companies in AI, tech, and machine learning.
     You're great at finding interesting, exciting projects on the LocalLLama subreddit. You turn scraped data into detailed reports with names
@@ -10,7 +12,8 @@ explorer = Agent(
     tools=[BrowserTool().scrape_reddit] + human_tools
 )
 
-writer = Agent(
+def writer(self):
+    return Agent(
     role="Senior Technical Writer",
     goal="Write engaging and interesting blog posts about the latest AI projects using simple, layman vocabulary",
     backstory="""You are an expert writer on technical innovation, especially in the field of AI and machine learning. You know how to write in
@@ -20,7 +23,8 @@ writer = Agent(
     allow_delegation=True
 )
 
-critic = Agent(
+def critic(self):
+    return Agent(
     role="Expert Writing Critic",
     goal="Provide feedback and criticize blog post drafts. Ensure that the tone and writing style is compelling, simple, and concise",
     backstory="""You are an expert at providing feedback to technical writers. You can identify when a blog text isn't concise,
@@ -29,4 +33,3 @@ critic = Agent(
     verbose=True,
     allow_delegation=True
 )
-
