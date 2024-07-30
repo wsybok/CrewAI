@@ -1,7 +1,7 @@
 import os
-from crewai import Agent, Task, Process, Crew
-from agents import explorer, writer, critic
-from tasks import task_report, task_blog, task_critique
+from crewai import Process, Crew
+from agents import CrewAgents
+from tasks import CrewTasks
 
 api = os.environ.get("OPENAI_API_KEY")
 
