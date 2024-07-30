@@ -1,16 +1,12 @@
-# app.py
-
 import os
 from crewai import Agent, Task, Process, Crew
 from langchain.agents import load_tools
-from tools import scrape_reddit
+from Agents import StockAnalysisAgents
+from Tasks import StockAnalysisTasks
 
 api = os.environ.get("OPENAI_API_KEY")
 
 human_tools = load_tools(["human"])
-
-class Reddit_BrowserTool:
-    scrape_reddit = scrape_reddit
 
 crew = Crew(
     agents=[explorer, writer, critic],
