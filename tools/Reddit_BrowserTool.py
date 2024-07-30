@@ -1,3 +1,5 @@
+from langchain.tools import tool
+
 class Reddit_BrowserTool:
     @tool("Scrape reddit content")
     def scrape_reddit(max_comments_per_post=7):
