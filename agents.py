@@ -1,3 +1,6 @@
+from crewai import Agent, Task, Process, Crew
+
+
 class CrewAgents():
   def explorer(self):
     return Agent(
