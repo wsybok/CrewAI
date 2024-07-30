@@ -1,5 +1,5 @@
 from crewai import Agent
-from tools.Reddit_BrowserTool import
+from tools.Reddit_BrowserTool import Reddit_BrowserTool
 
 class CrewAgents():
   def explorer(self):
