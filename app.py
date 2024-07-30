@@ -1,7 +1,10 @@
 import os
+from dotenv import load_dotenv
 from crewai import Process, Crew
 from agents import CrewAgents
 from tasks import CrewTasks
+
+load_dotenv()
 
 api = os.environ.get("OPENAI_API_KEY")
 

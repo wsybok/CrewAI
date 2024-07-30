@@ -2,6 +2,7 @@ from crewai import Agent
 from tools.Reddit_BrowserTool import Reddit_BrowserTool
 from langchain_community.agent_toolkits.load_tools import load_tools
 
+reddit_tool = Reddit_BrowserTool()
 human_tools = load_tools(["human"])
 
 class CrewAgents:
@@ -15,7 +16,7 @@ class CrewAgents:
             """,
             verbose=True,
             allow_delegation=False,
-            tools=[Reddit_BrowserTool().scrape_reddit] + human_tools
+            tools=[reddit_tool.scrape_reddit] + human_tools
         )
 
     def writer(self):
