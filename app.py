@@ -18,15 +18,15 @@ agents = CrewAgents()
 tasks = CrewTasks()
 
 crew = Crew(
-    agents=[agents.explorer(), agents.writer(), agents.critic()],
-    tasks=[tasks.task_report(), tasks.task_blog(), tasks.task_critique()],
+    agents=[agents.explorer(), agents.writer(), agents.critic(), agents.telegra_writer()],
+    tasks=[tasks.task_report(), tasks.task_blog(), tasks.task_critique(), tasks.task_telegra()],
     verbose=2,
     process=Process.sequential,
 )
 
 result = crew.kickoff()
 
-report_file_path = "research_report.html"
+report_file_path = "research_report1.html"
 
 # Read the content of the HTML report file
 with open(report_file_path, "r", encoding="utf-8") as file:
@@ -34,12 +34,15 @@ with open(report_file_path, "r", encoding="utf-8") as file:
 
 # Use BeautifulSoup to parse the HTML and extract the body content
 soup = BeautifulSoup(html_report, 'html.parser')
-body_content = soup.body
+allowed_tags = ['a', 'aside', 'b', 'blockquote', 'br', 'code', 'em', 'figcaption', 'figure', 'h3', 'h4', 'hr', 'i', 'iframe', 'img', 'li', 'ol', 'p', 'pre', 's', 'strong', 'u', 'ul', 'video']
 
-# Convert the body content back to a string
-html_content = str(body_content)
+# Filter out disallowed tags
+for tag in soup.find_all(True):
+    if tag.name not in allowed_tags:
+        tag.unwrap()
 
-
+# Convert the filtered content back to a string
+html_content = str(soup)
 print("######################")
 print(result)
 

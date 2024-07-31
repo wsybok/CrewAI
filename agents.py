@@ -46,3 +46,13 @@ class CrewAgents:
             llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
             allow_delegation=True
         )
+    
+    def telegra_writer(self):
+        return Agent(
+            role="'Telegra Writer'",
+            goal="Rewrit the report so the report is suitable for a telegraph page",
+            backstory="""You are skilled in writing reports that are perfectly formatted for telegra. Your goal is to ensure that all reports adhere to the telegra formatting guidelines. telegra only Available tags: a, aside, b, blockquote, br, code, em, figcaption, figure, h3, h4, hr, i, iframe, img, li, ol, p, pre, s, strong, u, ul, video. """,
+            verbose=True,
+            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
+            allow_delegation=False
+        )

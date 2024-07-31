@@ -62,3 +62,14 @@ class CrewTasks:
             An HTML file named research_report.html containing the blog article.'
             """)
         )
+    def task_telegra(self):
+        return Task(
+            description=dedent("""
+            Rewrite the report so that it is suitable for a telegraph page. Ensure that all reports adhere to the telegra formatting guidelines. The report should only contain the following tags: a, aside, b, blockquote, br, code, em, figcaption, figure, h3, h4, hr, i, iframe, img, li, ol, p, pre, s, strong, u, ul, video.
+            """),
+            agent=CrewAgents().telegra_writer(),
+            output_file='research_report1.html',
+            expected_output=dedent("""
+            A report formatted for a telegraph page using the specified tags.
+            """)
+        )
