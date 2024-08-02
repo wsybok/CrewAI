@@ -4,14 +4,14 @@ from langchain.tools import tool
 
 class RedditBrowserTool:
     @tool("Scrape reddit content")
-    def scrape_reddit(max_comments_per_post=7):
+    def scrape_reddit(subreddit_name, max_comments_per_post=7):
         """Useful to scrape a reddit content"""
         reddit = praw.Reddit(
             client_id="hrwfUNc2xubrhwrlHDStNA",
             client_secret="QzqidqUIkYuwN3g4MoNlm2rLARgw_A",
             user_agent="user-agent",
         )
-        subreddit = reddit.subreddit("LocalLLaMA")
+        subreddit = reddit.subreddit(subreddit_name)
         scraped_data = []
 
         for post in subreddit.hot(limit=12):
