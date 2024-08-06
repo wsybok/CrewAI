@@ -24,33 +24,39 @@ def main():
 
     with st.sidebar:
         subreddit_name = st.text_input("Enter Subreddit Name", placeholder="LocalLLaMA")
+        generate_report_clicked = st.button("Generate Report", key="generate_report_button")
 
-    # Initialize session state for editor content
-    if 'editor_content' not in st.session_state:
-        st.session_state['editor_content'] = ""
-
-    if st.button("Generate Report", key="generate_report_button"):
-        filtered_html_content = generate_report(subreddit_name)
+    if generate_report_clicked:
+        with st.spinner("Generating report..."):
+            filtered_html_content = generate_report(subreddit_name)
         if filtered_html_content:
             st.session_state['editor_content'] = filtered_html_content
+            st.session_state['report_ready'] = True
             st.info("Report generated and filtered. Ready for review and editing.")
 
-    # Quill editor for editing HTML content
-    edited_content = st_quill(
-        value=st.session_state['editor_content'],
-        html=True,
-        placeholder="Edit the Research Report"
-    )
+    # Initialize session state for editor content and report readiness
+    if 'editor_content' not in st.session_state:
+        st.session_state['editor_content'] = ""
+    if 'report_ready' not in st.session_state:
+        st.session_state['report_ready'] = False
 
-    if st.button("Apply Changes", key="apply_changes_button"):
-        # Update the session state with the current editor content
-        st.session_state['editor_content'] = edited_content
+    # Conditionally render the Quill editor if the report is ready
+    if st.session_state['report_ready']:
+        edited_content = st_quill(
+            value=st.session_state['editor_content'],
+            html=True,
+            placeholder="Edit the Research Report"
+        )
 
-    if st.button("Send Report", key="send_report_button"):
-        telegraph_url = send_report(st.session_state['editor_content'])
-        if telegraph_url:
-            st.success("Report generated and sent to Telegram!")
-            st.write(f"Telegraph URL: {telegraph_url}")
+        if st.button("Apply Changes", key="apply_changes_button"):
+            # Update the session state with the current editor content
+            st.session_state['editor_content'] = edited_content
+
+        if st.button("Send Report", key="send_report_button"):
+            telegraph_url = send_report(st.session_state['editor_content'])
+            if telegraph_url:
+                st.success("Report generated and sent to Telegram!")
+                st.write(f"Telegraph URL: {telegraph_url}")
 
 if __name__ == "__main__":
     main()
