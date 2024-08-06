@@ -1,12 +1,20 @@
+import os
 from crewai import Agent
 from tools.Reddit_BrowserTool import RedditBrowserTool
 from langchain_community.agent_toolkits.load_tools import load_tools
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from dotenv import load_dotenv
 
 reddit_tool = RedditBrowserTool()
 human_tools = load_tools(["human"])
 
-
+# call gemini model
+llm_gemini = ChatGoogleGenerativeAI(model='gemini-1.5-pro-exp-0801',
+                            temperature=0.1,
+                            verbose = True,
+                            goggle_api_key=os.getenv('GOOGLE_API_KEY')
+                            )   
 
 class CrewAgents:
     def explorer(self):
@@ -19,8 +27,9 @@ class CrewAgents:
             """,
             verbose=True,
             allow_delegation=False,
-            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
-            tools=[reddit_tool.scrape_reddit] + human_tools
+            llm = llm_gemini,
+            #llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
+            tools=[reddit_tool.scrape_reddit]
         )
 
     def writer(self):
@@ -31,8 +40,9 @@ class CrewAgents:
             an engaging, interesting, but simple, straightforward, and concise manner. You know how to present complicated technical terms to the general audience in a
             fun way by using layman words. ONLY use scraped data from the LocalLLama subreddit for the blog.""",
             verbose=True,
-            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
-            allow_delegation=True
+            llm = llm_gemini,
+            #llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
+            allow_delegation=False
         )
 
     def critic(self):
@@ -43,8 +53,9 @@ class CrewAgents:
             simple, or engaging enough. You know how to provide helpful feedback that can improve any text. You ensure that the text
             remains technical and insightful while using layman terms.""",
             verbose=True,
-            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
-            allow_delegation=True
+            llm = llm_gemini,
+            #llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
+            allow_delegation=False
         )
     
     def telegra_writer(self):
@@ -53,6 +64,7 @@ class CrewAgents:
             goal="Rewrit the report so the report is suitable for a telegraph page",
             backstory="""You are skilled in writing reports that are perfectly formatted for telegra. Your goal is to ensure that all reports adhere to the telegra formatting guidelines. telegra only Available tags: a, aside, b, blockquote, br, code, em, figcaption, figure, h3, h4, hr, i, iframe, img, li, ol, p, pre, s, strong, u, ul, video. """,
             verbose=True,
-            llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
+            llm=llm_gemini,
+            #llm=ChatOpenAI(model_name="gpt-4o-mini-2024-07-18", temperature=0.7),
             allow_delegation=False
         )

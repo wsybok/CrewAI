@@ -8,3 +8,5 @@ markdown
 telegraph
 BeautifulSoup
 streamlit
+streamlit-quill
+flask
