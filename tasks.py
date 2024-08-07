@@ -7,7 +7,8 @@ class CrewTasks:
         return Task(
             description=dedent("""
             Use and summarize scraped data from subreddit LocalLLama to make a detailed report on the latest rising projects in AI. Use ONLY scraped data from LocalLLama to generate the report. Your final answer MUST be a full analysis report, text only, ignore any code or anything that isn't text. The report has to have bullet points and with 5-10 exciting new AI projects and tools. Write names of every tool and project. Each bullet point MUST contain 3 sentences that refer to one specific AI company, product, model or anything you found on subreddit LocalLLama.
-            """),
+            {self.__tip_section()}
+                               """),
             agent=CrewAgents().explorer(),
             expected_output=dedent("""
             A text-based analysis report with the following structure:
@@ -26,7 +27,8 @@ class CrewTasks:
         return Task(
             description=dedent("""
             Write a blog article with text only and with a short but impactful headline and at least 10 paragraphs. The blog should summarize the report on the latest AI tools found on the LocalLLama subreddit. The style and tone should be compelling and concise, fun, technical but also use layman words for the general public. Name specific new, exciting projects, apps, and companies in the AI world. Don't write "**Paragraph [number of the paragraph]:**", instead start the new paragraph in a new line. Write the names of projects and tools in BOLD. ALWAYS include links to the post page. ONLY include information from LocalLLAma.
-            """),
+            {self.__tip_section()}
+                               """),
             agent=CrewAgents().writer(),
             expected_output=dedent("""
             A text-only blog article with the following structure:
@@ -55,7 +57,8 @@ class CrewTasks:
         return Task(
             description=dedent("""
             The task entails summarizing and critiquing AI projects from the LocalLLama subreddit. The output must be formatted in Markdown and include interesting facts and personal thoughts on how each project connects to the overall theme of the newsletter.
-            """),
+            {self.__tip_section()}
+                               """),
             agent=CrewAgents().critic(),
             output_file='research_report.html',
             expected_output=dedent("""
@@ -66,6 +69,7 @@ class CrewTasks:
         return Task(
             description=dedent("""
             Rewrite the report so that it is suitable for a telegraph page. Ensure that all reports adhere to the telegra formatting guidelines. The report should only contain the following tags: a, aside, b, blockquote, br, code, em, figcaption, figure, h3, h4, hr, i, iframe, img, li, ol, p, pre, s, strong, u, ul, video.
+                               {self.__tip_section()}
             """),
             agent=CrewAgents().telegra_writer(),
             output_file='research_report1.html',
@@ -73,3 +77,5 @@ class CrewTasks:
             A report formatted for a telegraph page using the specified tags.
             """)
         )
+    def __tip_section(self):
+     return "If you do your BEST WORK, I'll give you a $10,000 commission!"
